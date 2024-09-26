@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;800&family=VT323&display=swap');
+
+
+body {
+    margin: 0;
+    font-family: "JetBrains Mono Light";
+    background-image: url('Anfield.jpg');
+    background-size: cover;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    gap: 10px;
+    padding: 30px;
+}
+
+.grid-container > div {
+    background-color: rgba(0, 0, 0, 0.85);
+    border-color: white;
+    border-radius: 5px;
+    place-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+.item1 {
+    grid-column: span 3;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.liverpool-badge {
+    width: 70px;
+    height: 90px;
+}
+
+#badge1 {
+    justify-self: end;
+}
+
+#badge2 {
+    justify-self: left;
+}
+
+.item2 {
+    display: grid;
+    grid-template-rows: 0.3fr 1fr;
+}
+
+.item3 {
+    display: grid;
+    grid-template-rows: 1fr 0.1fr;
+}
+
+.item4 {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.item5 {
+    grid-column: span 3;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+button {
+    height: 60px;
+    width: 130px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+    align-self: center;
+    margin: 10px;
+}
+
+#score {
+    font-size: 70px;
+}
+
+p, li, h1, h2, h3 {
+    color: white;
+}
+
+#jota-dive {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 882px) {
+    .item1, .item2, .item3, .item4, .item5  {
+        grid-column: span 3;
+        width: auto;
+    }
+
+    #badge1, #badge2 {
+        align-self: center;
+    }
+}
