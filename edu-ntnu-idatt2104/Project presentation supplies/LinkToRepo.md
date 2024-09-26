@@ -1,0 +1,1 @@
+### Follow this repo: [ASIC and FPGA code examples IDATT2104](https://gitlab.stud.idi.ntnu.no/jenscaa/asic-and-fpga-code-examples-idatt2104)

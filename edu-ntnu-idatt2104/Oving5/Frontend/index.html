@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<h1>Øving5</h1>
+<div class="field">
+    <textarea id="input"></textarea>
+</div>
+<div>
+    <button onclick="runCode()">Run code</button>
+</div>
+<div class="field">
+    <h2>Output</h2>
+    <textarea id="output"></textarea>
+</div>
+
+<script lang="js" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script lang="js">
+    async function runCode() {
+        const code = document.getElementById('input').value;
+        
+        try {
+            const response = await axios.post("http://localhost:8080/oving5/run", code, {headers: {
+                'Content-Type' : 'text/plain'
+                }})
+            console.log(response.data);
+            
+            // Assuming the response.data is a string, adjust accordingly based on actual response structure
+            document.getElementById('output').value = response.data;
+        } catch (error) {
+            console.log("Something went wrong!" + error);
+        }
+    }
+</script>
+</body>
+</html>

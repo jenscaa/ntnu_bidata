@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+    <div class="field">
+        <textarea id="input"></textarea>
+    </div>
+    <div>
+        <button onclick="sendMessage()">Send Message</button>
+        <button onclick="disconnect()">Disconnect</button>
+    </div>
+    <div>
+        <ul id="messages"></ul>
+    </div>
+    
+        <script>
+            let webSocket = new WebSocket("ws://localhost:1250");
+
+            webSocket.onopen = function(e) {
+                console.log("[open] Connection established");
+                console.log("Sending to server");
+                webSocket.send("Initial message");
+            };
+            
+            function sendMessage() {
+                const message = document.getElementById("input");
+                console.log(message.value)
+                webSocket.send(message.value);
+            }
+            
+            function disconnect() {
+                webSocket.close(1000, "Websocket closed on command");
+            }
+
+            webSocket.onmessage = function(event) {
+                console.log(`[message] Data received from server: ${event.data}`);
+                const listOfMessages = document.getElementById("messages");
+                var new_element = document.createElement("li");
+                var content = document.createTextNode(event.data);
+                new_element.appendChild(content);
+                listOfMessages.appendChild(new_element);
+                document.getElementById("input").value = "";
+            };
+
+            webSocket.onclose = function(event) {
+                if (event.wasClean) {
+                    console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+                } else {
+                    // e.g. server process killed or network down
+                    // event.code is usually 1006 in this case
+                    console.log('[close] Connection died');
+                }
+            };
+
+            webSocket.onerror = function(error) {
+                console.log(`[error]`);
+            };
+        </script>
+        <style>
+            #input {
+                min-width: 40%;
+                min-height: 50px;
+            }
+        </style>
+    </body>
+</html>

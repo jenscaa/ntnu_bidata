@@ -1,0 +1,9 @@
+textarea {
+    min-width: 50%;
+    min-height: 40%;
+}
+
+.textarea-div {
+    min-height: 20%;
+}
+

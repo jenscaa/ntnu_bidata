@@ -1,0 +1,10 @@
+keytool -genkey -alias signFiles -keyalg RSA -keystore examplestore
+java -Djavax.net.ssl.keyStore=examplestore -Djavax.net.ssl.keyStorePassword=password JavaSSLServer
+java -Djavax.net.ssl.trustStore=examplestore -Djavax.net.ssl.trustStorePassword=password JavaSSLClient
+
+java -Djavax.net.ssl.keyStore=examplestore -Djavax.net.ssl.keyStorePassword=password JavaSSLServer.java
+java -Djavax.net.ssl.trustStore=examplestore -Djavax.net.ssl.trustStorePassword=password JavaSSLClient.java
+
+// Alternativt
+keytool -export -alias signFiles -file server.crt -keystore serverstore
+keytool -import -alias servercert -file server.crt -keystore clientstore
