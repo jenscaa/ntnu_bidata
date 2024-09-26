@@ -32,7 +32,6 @@
 - **[IDATT-2104](/edu-ntnu-idatt2104)** - Nettverksprogrammering og datakommunikasjon (*Network Programming and Data Communication*)
 - **[IDATT-2105](/edu-ntnu-idatt2105)** - Full-stack applikasjonsutvikling (*Full-stack Application Development*)
 - **[IDATT-2106](/edu-ntnu-idatt2106)** - Systemutvikling 2, med smidig prosjekt (*System Development 2, with Agile Project*)
-- **[IFYT-1002](/edu-ntnu-ifyt1002)** - Fysikk (*Physics*)
 
 ------
 
