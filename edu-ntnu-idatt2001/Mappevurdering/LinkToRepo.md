@@ -1,0 +1,1 @@
+### Follow this repo: [Paths](https://gitlab.stud.idi.ntnu.no/isakkm/edu.ntnu.idatt2001.paths)
