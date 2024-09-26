@@ -1,0 +1,196 @@
+DROP TABLE IF EXISTS ettersporsel;
+DROP TABLE IF EXISTS historikk;
+DROP TABLE IF EXISTS oppdrag;
+DROP TABLE IF EXISTS kandidat_kvalifikasjon;
+DROP TABLE IF EXISTS kvalifikasjon;
+DROP TABLE IF EXISTS aktiv_vikar;
+DROP TABLE IF EXISTS vikar;
+DROP TABLE IF EXISTS kandidat;
+DROP TABLE IF EXISTS bedrift;
+
+CREATE TABLE kandidat(
+	kandidat_id INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	fornavn VARCHAR(30) NOT NULL,
+	etternavn VARCHAR(30) NOT NULL,
+	telefon INT(10) UNSIGNED NOT NULL,
+	epost_adresse VARCHAR(50) NOT NULL,
+	PRIMARY KEY(kandidat_id)
+)ENGINE=INNODB;
+
+CREATE TABLE kvalifikasjon(
+	kvalifikasjon_id INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	beskrivelse VARCHAR(50) NOT NULL,
+	PRIMARY KEY(kvalifikasjon_id)
+)ENGINE=INNODB;
+
+CREATE TABLE kandidat_kvalifikasjon(
+	kandidat_id INT UNSIGNED,
+	kvalifikasjon_id INT UNSIGNED,
+	CONSTRAINT FK_kandidat FOREIGN KEY(kandidat_id)
+	REFERENCES kandidat(kandidat_id),
+	CONSTRAINT FK_kvalifikasjon FOREIGN KEY(kvalifikasjon_id)
+	REFERENCES kvalifikasjon(kvalifikasjon_id)
+)ENGINE=INNODB;
+
+CREATE TABLE oppdrag(
+	oppdragsnr INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	kvalifikasjon_id INT UNSIGNED,
+	beskrivelse VARCHAR(50) NOT NULL,
+	PRIMARY KEY(oppdragsnr),
+	CONSTRAINT FK_kvalifikasjon_oppdrag FOREIGN KEY(kvalifikasjon_id)
+	REFERENCES kvalifikasjon(kvalifikasjon_id)
+)ENGINE=INNODB;
+
+CREATE TABLE bedrift(
+	organisasjonsnr INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	navn VARCHAR(30) NOT NULL,
+	telefon INT(10) UNSIGNED NOT NULL,
+	epost_adresse VARCHAR(50) NOT NULL,
+	PRIMARY KEY(organisasjonsnr)
+)ENGINE=INNODB;
+
+CREATE TABLE vikar(
+	vikar_id INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	kandidat_id INT UNSIGNED,
+	PRIMARY KEY(vikar_id),
+	CONSTRAINT FK_kandidat_vikar FOREIGN KEY(kandidat_id)
+	REFERENCES kandidat(kandidat_id)
+)ENGINE=INNODB;
+
+
+CREATE TABLE aktiv_vikar(
+	aktiv_vikar_id INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	vikar_id INT UNSIGNED,
+	organisasjonsnr INT(4) UNSIGNED,
+	PRIMARY KEY(aktiv_vikar_id),
+	CONSTRAINT FK_vikar_aktiv_vikar FOREIGN KEY(vikar_id)
+	REFERENCES vikar(vikar_id),
+	CONSTRAINT FK_bedrift_aktiv_vikar FOREIGN KEY(organisasjonsnr)
+	REFERENCES bedrift(organisasjonsnr)
+)ENGINE=INNODB;
+
+CREATE TABLE ettersporsel(
+	ettersporsel_id INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	vikar_id INT UNSIGNED,
+	organisasjonsnr INT UNSIGNED,
+	oppdragsnr INT UNSIGNED,
+	kvalifikasjon_id INT UNSIGNED,
+	start_dato DATE, 
+	forelopig_slutt_dato DATE,
+	PRIMARY KEY(ettersporsel_id),
+	CONSTRAINT FK_vikar_ettersporsel FOREIGN KEY(vikar_id)
+	REFERENCES vikar(vikar_id),
+	CONSTRAINT FK_bedrift_ettersporsel FOREIGN KEY(organisasjonsnr)
+	REFERENCES bedrift(organisasjonsnr),
+	CONSTRAINT FK_oppdrag_ettersporsel FOREIGN KEY(oppdragsnr)
+	REFERENCES oppdrag(oppdragsnr),
+	CONSTRAINT FK_kvalifikasjon_ettersporsel FOREIGN KEY(kvalifikasjon_id)
+	REFERENCES kvalifikasjon(kvalifikasjon_id)
+)ENGINE=INNODB;
+
+CREATE TABLE historikk(
+	historikk_id INT UNSIGNED UNIQUE AUTO_INCREMENT NOT NULL,
+	kandidat_id INT UNSIGNED,
+	oppdragsnr INT UNSIGNED,
+	organisasjonsnr INT UNSIGNED,
+	kvalifikasjon_id INT UNSIGNED,
+	start_dato DATE,
+	slutt_dato DATE,
+	PRIMARY KEY(historikk_id),
+	CONSTRAINT FK_kandidat_historikk FOREIGN KEY(kandidat_id)
+	REFERENCES kandidat(kandidat_id),
+	CONSTRAINT FK_oppdrag_historikk FOREIGN KEY(oppdragsnr)
+	REFERENCES oppdrag(oppdragsnr),
+	CONSTRAINT FK_bedrift_historikk FOREIGN KEY(organisasjonsnr)
+	REFERENCES bedrift(organisasjonsnr),
+	CONSTRAINT FK_kvalifikasjon_historikk FOREIGN KEY(kvalifikasjon_id)
+	REFERENCES kvalifikasjon(kvalifikasjon_id)	
+)ENGINE=INNODB;
+
+/*
+ * Insert-setnigner
+ * **********************************************************************************************************
+ */
+
+/*
+ * Kandidat
+ */
+
+INSERT INTO kandidat VALUES(DEFAULT, "Jonas", "Gahr Støre", 98765432, "jonas.gahr.støre@gmail.com");
+INSERT INTO kandidat VALUES(DEFAULT, "Jens", "Stoltenberg", 92228779, "jensemannen.stoltenberg@gmail.com");
+INSERT INTO kandidat VALUES(DEFAULT, "Donald", "Trump", 69696969, "donald.trump@gmail.com");
+INSERT INTO kandidat VALUES(DEFAULT, "Barack", "Obama", 72165432, "obama.rama.drama@gmail.com");
+INSERT INTO kandidat VALUES(DEFAULT, "Elon", "Musk", 10010110, "ceo.of.everything@gmail.com");
+
+/*
+ * Kvalifikasjon
+ */
+
+INSERT INTO kvalifikasjon VALUES(DEFAULT, "Ledelse");
+INSERT INTO kvalifikasjon VALUES(DEFAULT, "Systemingeniør");
+INSERT INTO kvalifikasjon VALUES(DEFAULT, "Byggingeniør");
+INSERT INTO kvalifikasjon VALUES(DEFAULT, "Aksjeinvestor");
+INSERT INTO kvalifikasjon VALUES(DEFAULT, "Innovatør");
+
+/*
+ * Oppdrag
+ */
+
+INSERT INTO oppdrag VALUES(DEFAULT, 1, "Led ansatte til en Victory Royale");
+INSERT INTO oppdrag VALUES(DEFAULT, 1, "Kjeft på alle ansatte");
+INSERT INTO oppdrag VALUES(DEFAULT, 1, "PLEASE");
+INSERT INTO oppdrag VALUES(DEFAULT, 2, "Opprett et nytt system for hardware");
+
+/*
+ * Kandidat_kvalifikasjon
+ */
+
+INSERT INTO kandidat_kvalifikasjon VALUES(2, 1);
+INSERT INTO kandidat_kvalifikasjon VALUES(3, 4);
+INSERT INTO kandidat_kvalifikasjon VALUES(4, 1);
+INSERT INTO kandidat_kvalifikasjon VALUES(5, 1);
+INSERT INTO kandidat_kvalifikasjon VALUES(5, 2);
+INSERT INTO kandidat_kvalifikasjon VALUES(5, 3);
+INSERT INTO kandidat_kvalifikasjon VALUES(5, 4);
+INSERT INTO kandidat_kvalifikasjon VALUES(5, 5);
+
+/*
+ * Vikar
+ */
+
+INSERT INTO vikar VALUES(1, 1);
+INSERT INTO vikar VALUES(2, 2);
+INSERT INTO vikar VALUES(3, 3);
+INSERT INTO vikar VALUES(4, 4);
+INSERT INTO vikar VALUES(5, 5);
+
+/*
+ * Bedrift
+ */
+
+INSERT INTO bedrift VALUES(1001, "SpaceX", 77776969, "space_x@gmail.com");
+INSERT INTO bedrift VALUES(1002, "Neuro Link", 77696969, "nuero.link@gmail.com");
+INSERT INTO bedrift VALUES(1003, "Boring Company", 71376969, "boring.company@gmail.com");
+
+/*
+ * Aktiv_Vikar
+ */
+
+INSERT INTO aktiv_vikar VALUES(1, 5, 1001);
+INSERT INTO aktiv_vikar VALUES(2, 5, 1002);
+INSERT INTO aktiv_vikar VALUES(3, 4, 1003);
+
+/*
+ * Etterspørsel
+ */
+
+INSERT INTO ettersporsel VALUES(DEFAULT, 2, 1001, 2, 1, DATE('2023-10-24'), DATE('2023-11-30'));
+INSERT INTO ettersporsel VALUES(DEFAULT, 4, 1002, 4, 2, DATE('2023-10-27'), DATE('2023-12-01'));
+INSERT INTO ettersporsel VALUES(DEFAULT, 5, 1003, 4, 2, DATE('2023-10-31'), DATE('2023-12-31'));
+
+/*
+ * Historikk
+ */
+
+INSERT INTO historikk VALUES(1, 5, 2, 1002, 1, DATE('2022-10-24'), DATE('2022-11-30'));
+INSERT INTO historikk VALUES(2, 5, 4, 1003, 2, DATE('2022-10-27'), DATE('2022-12-01'))
