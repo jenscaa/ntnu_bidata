@@ -1,0 +1,1 @@
+### Follow this repo: [idatt2106-2024-07 backend](https://gitlab.stud.idi.ntnu.no/idatt2106-2024-07/backend)
