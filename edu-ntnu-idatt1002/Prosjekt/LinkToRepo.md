@@ -1,0 +1,1 @@
+### Follow this repo: [idatx1002_2023_group2](https://gitlab.stud.idi.ntnu.no/group-2-systemutvikling/system-development-group-2)
