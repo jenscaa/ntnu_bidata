@@ -1,0 +1,33 @@
+digraph Tree {
+node [shape=box, fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label="unif_cell_shape <= 3.5\ngini = 0.455\nsamples = 559\nvalue = [363, 196]\nclass = Benign"] ;
+1 [label="bare_nuclei <= 5.5\ngini = 0.117\nsamples = 368\nvalue = [345, 23]\nclass = Benign"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="norm_nucleoli <= 3.5\ngini = 0.044\nsamples = 352\nvalue = [344, 8]\nclass = Benign"] ;
+1 -> 2 ;
+3 [label="gini = 0.017\nsamples = 345\nvalue = [342, 3]\nclass = Benign"] ;
+2 -> 3 ;
+4 [label="clump_thickness <= 4.5\ngini = 0.408\nsamples = 7\nvalue = [2, 5]\nclass = Maligent"] ;
+2 -> 4 ;
+5 [label="gini = 0.0\nsamples = 2\nvalue = [2, 0]\nclass = Benign"] ;
+4 -> 5 ;
+6 [label="gini = 0.0\nsamples = 5\nvalue = [0, 5]\nclass = Maligent"] ;
+4 -> 6 ;
+7 [label="gini = 0.117\nsamples = 16\nvalue = [1, 15]\nclass = Maligent"] ;
+1 -> 7 ;
+8 [label="bare_nuclei <= 1.5\ngini = 0.171\nsamples = 191\nvalue = [18, 173]\nclass = Maligent"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="clump_thickness <= 6.5\ngini = 0.486\nsamples = 24\nvalue = [10, 14]\nclass = Maligent"] ;
+8 -> 9 ;
+10 [label="marg_adhesion <= 2.0\ngini = 0.426\nsamples = 13\nvalue = [9, 4]\nclass = Benign"] ;
+9 -> 10 ;
+11 [label="gini = 0.0\nsamples = 7\nvalue = [7, 0]\nclass = Benign"] ;
+10 -> 11 ;
+12 [label="gini = 0.444\nsamples = 6\nvalue = [2, 4]\nclass = Maligent"] ;
+10 -> 12 ;
+13 [label="gini = 0.165\nsamples = 11\nvalue = [1, 10]\nclass = Maligent"] ;
+9 -> 13 ;
+14 [label="gini = 0.091\nsamples = 167\nvalue = [8, 159]\nclass = Maligent"] ;
+8 -> 14 ;
+}
