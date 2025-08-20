@@ -1,0 +1,1 @@
+### Follow this repo: [IDATT2502-Exercises](https://github.com/jenscaa/IDATT2502-Exercises)
