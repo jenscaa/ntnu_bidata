@@ -28,7 +28,7 @@
 - **[IDATT-2101](/edu-ntnu-idatt2101)** - Algoritmer og datastrukturer (*Algorithms and Data Structures*)
 - **[IDATT-2103](/edu-ntnu-idatt2103)** - Databaser (*Databases*)
 - **[IDATT-2202](/edu-ntnu-idatt2202)** - Operativsystemer (*Operating Systems*)
-- **ISTT1003** - Statistikk (*Statistics*)
+- **ISTT-1003** - Statistikk (*Statistics*)
 
 ### Semester 04, Spring 2024
 
